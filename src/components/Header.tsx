@@ -15,6 +15,7 @@ export const Header = () => {
       overflow={'hidden'}
       w={'100%'}
       zIndex={1000}
+      backgroundColor={'gray.100'}
     >
       <Logo />
 
