@@ -26,9 +26,10 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { BsCalendarDate } from 'react-icons/bs'
-import { FaCampground, FaCheckCircle } from 'react-icons/fa'
+import { FaCampground, FaCheckCircle, FaSortAmountDown } from 'react-icons/fa'
 import { GiAges } from 'react-icons/gi'
 import { ReactNode } from 'react'
+import { isNotNilOrEmpty } from 'ramda-adjunct'
 
 export type PriceSelectionProps = {
   id: number
@@ -41,7 +42,9 @@ export type PriceSelectionProps = {
   place: string
   ageFrom: number
   ageTo: number
-  theme?: string
+  theme?: string | null
+  limitFrom?: number | null
+  limitTo?: number | null
 }
 
 const getDialog = () => {
@@ -137,10 +140,18 @@ export const PriceSelection = (props: PriceSelectionProps) => {
                 <ListIcon as={GiAges} color='green.500' />
                 Věk: {props.ageFrom} - {props.ageTo} let
               </ListItem>
-              <ListItem>
-                <ListIcon as={FaCheckCircle} color='green.500' />
-                Téma: {props.theme}
-              </ListItem>
+              {isNotNilOrEmpty(props.theme) ? (
+                <ListItem>
+                  <ListIcon as={FaCheckCircle} color='green.500' />
+                  Téma: {props.theme}
+                </ListItem>
+              ) : null}
+              {isNotNilOrEmpty(props.limitTo) ? (
+                <ListItem>
+                  <ListIcon as={FaSortAmountDown} color={'green.500'} />
+                  Limit: {props.limitFrom} / {props.limitTo}
+                </ListItem>
+              ) : null}
               <ListItem>{props.description}</ListItem>
             </List>
             <Box w='80%' pt={7}>
