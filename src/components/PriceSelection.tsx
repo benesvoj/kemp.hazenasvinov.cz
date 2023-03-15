@@ -1,7 +1,13 @@
 import {
   Box,
   Button,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Grid,
+  GridItem,
   HStack,
+  Input,
   List,
   ListIcon,
   ListItem,
@@ -144,20 +150,70 @@ export const PriceSelection = (props: PriceSelectionProps) => {
         </Box>
       </PriceWrapper>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Přihláška</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text>ABCD</Text>
+            <Grid templateColumns='repeat(2, 1fr)' gap={6}>
+              <GridItem>
+                <FormControl>
+                  <FormLabel>Email:</FormLabel>
+                  <Input type={'email'} placeholder={'email@email.cz'} />
+                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                </FormControl>
+              </GridItem>
+              <GridItem>
+                <FormControl>
+                  <FormLabel>Telefon:</FormLabel>
+                  <Input type={'tel'} placeholder={'777123456'} />
+                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                </FormControl>
+              </GridItem>
+              <GridItem>
+                <FormControl>
+                  <FormLabel>Jméno a příjmení dítěte:</FormLabel>
+                  <Input type={'text'} placeholder={'Josef Novák'} />
+                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                </FormControl>
+              </GridItem>
+              <GridItem>
+                <FormControl>
+                  <FormLabel>Datum narození:</FormLabel>
+                  <Input type={'date'} placeholder={'Josef Novák'} />
+                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                </FormControl>
+              </GridItem>
+              <GridItem>
+                <FormControl>
+                  <FormLabel>Soustředění:</FormLabel>
+                  <Input type={'text'} placeholder={'Josef Novák'} />
+                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                </FormControl>
+              </GridItem>
+              <GridItem>
+                <FormControl>
+                  <FormLabel>Třída ZŠ:</FormLabel>
+                  <Input type={'text'} placeholder={'Josef Novák'} />
+                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                </FormControl>
+              </GridItem>
+              <GridItem>
+                <FormControl>
+                  <FormLabel>Doplňující informace (alergie, jídlo, ...):</FormLabel>
+                  <Input type={'text'} placeholder={'Josef Novák'} />
+                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                </FormControl>
+              </GridItem>
+            </Grid>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
+            <Button variant='ghost' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant='ghost'>Secondary Action</Button>
+            <Button colorScheme='blue'>Odeslat</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
