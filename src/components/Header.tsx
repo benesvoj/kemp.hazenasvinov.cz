@@ -1,18 +1,11 @@
 import { Box, HStack, Stack, Text, useColorModeValue } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link'
 import { Logo } from './Logo'
 import { getMenuItems } from '../utils/urls'
 import React from 'react'
 
 export const Header = () => {
   const menuItems = getMenuItems()
-
-  const handleClickScroll = (props: string) => {
-    const element = document.getElementById(props)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.700')}>

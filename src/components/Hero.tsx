@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Container,
+  Flex,
   Heading,
   Icon,
   Stack,
@@ -9,11 +10,21 @@ import {
   createIcon,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
-import { urls } from '../utils/urls'
+import { HashLink as Link } from 'react-router-hash-link'
+import { getMenuItems, urls } from '../utils/urls'
 import Head from 'next/head'
 
 export const Hero = () => {
+  const menuItems = getMenuItems()
+
+  const getProperMenuLink = (props: number) => {
+    let result = menuItems.find(menu => {
+      return menu.id === props
+    })
+    console.log(result)
+    return !result!.url ? result!.url : urls.website.link
+  }
+
   return (
     <>
       <Head>
@@ -23,71 +34,77 @@ export const Hero = () => {
         />
       </Head>
 
-      <Container maxW={'3xl'}>
-        <Stack
-          as={Box}
-          textAlign={'center'}
-          spacing={{ base: 8, md: 14 }}
-          py={{ base: 20, md: 36 }}
-        >
-          <Heading
-            fontWeight={600}
-            fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
-            lineHeight={'110%'}
-          >
-            Sportovní kemp <br />
-            <Text as={'span'} color={'green.400'}>
-              házenkářského oddílu <br />
-              TJ Sokol Svinov
-            </Text>
-          </Heading>
-          <Text color={'gray.500'}>
-            Týdenní kemp plný zážitků, nových přátel, sportovních aktivit a výletů! Poznej něco
-            nového s naší partou.
-          </Text>
+      <Container maxW={'3xl'} h={'100vh'}>
+        <Flex h={'100%'} w={'100%'} alignItems={'center'} justifyContent={'center'}>
           <Stack
-            direction={'column'}
-            spacing={3}
-            align={'center'}
-            alignSelf={'center'}
-            position={'relative'}
+            as={Box}
+            textAlign={'center'}
+            spacing={{ base: 8, md: 14 }}
+            py={{ base: 20, md: 36 }}
           >
-            <Button
-              colorScheme={'green'}
-              bg={'green.400'}
-              rounded={'full'}
-              px={6}
-              _hover={{
-                bg: 'green.500',
-              }}
+            <Heading
+              fontWeight={600}
+              fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
+              lineHeight={'110%'}
             >
-              <Link to={urls.website.sections.pricing}>Přihlas se</Link>
-            </Button>
-            <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
-              <Link to={urls.website.sections.aboutMe}>Chceš se dozvědět více?</Link>
-            </Button>
-            <Box>
-              <Icon
-                as={Arrow}
-                color={useColorModeValue('gray.800', 'gray.300')}
-                w={71}
-                position={'absolute'}
-                right={-71}
-                top={'10px'}
-              />
-              <Text
-                fontSize={'lg'}
-                fontFamily={'Caveat'}
-                position={'absolute'}
-                right={'-125px'}
-                top={'-15px'}
-                transform={'rotate(10deg)'}
-              >
-                Neváhej a klikni
+              Sportovní kemp <br />
+              <Text as={'span'} color={'green.400'}>
+                házenkářského oddílu <br />
+                TJ Sokol Svinov
               </Text>
-            </Box>
+            </Heading>
+            <Text color={'gray.500'}>
+              Týdenní kemp plný zážitků, nových přátel, sportovních aktivit a výletů! Poznej něco
+              nového s naší partou.
+            </Text>
+            <Stack
+              direction={'column'}
+              spacing={3}
+              align={'center'}
+              alignSelf={'center'}
+              position={'relative'}
+            >
+              <Button
+                colorScheme={'green'}
+                bg={'green.400'}
+                rounded={'full'}
+                px={6}
+                _hover={{
+                  bg: 'green.500',
+                }}
+              >
+                {/*TODO predelat do vice dynamicky*/}
+                {/*<Link to={getProperMenuLink(50)}>Přihlas se</Link>*/}
+                <Link to={'#pricing'}>Přihlas se</Link>
+              </Button>
+              <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
+                {/*TODO predelat do vice dynamicky*/}
+                <Link to={'#aboutme'}>Chceš se dozvědět více?</Link>
+                {/*<Link to={getProperMenuLink(20)}>Chceš se dozvědět více?</Link>*/}
+              </Button>
+              <Box>
+                <Icon
+                  as={Arrow}
+                  color={useColorModeValue('gray.800', 'gray.300')}
+                  w={71}
+                  position={'absolute'}
+                  right={-71}
+                  top={'10px'}
+                />
+                <Text
+                  fontSize={'lg'}
+                  fontFamily={'Caveat'}
+                  position={'absolute'}
+                  right={'-125px'}
+                  top={'-15px'}
+                  transform={'rotate(10deg)'}
+                >
+                  Neváhej a klikni
+                </Text>
+              </Box>
+            </Stack>
           </Stack>
-        </Stack>
+        </Flex>
       </Container>
     </>
   )

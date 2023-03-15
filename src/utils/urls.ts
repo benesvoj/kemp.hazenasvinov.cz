@@ -24,9 +24,9 @@ export const urls = {
       },
     ],
     sections: {
-      aboutMe: '#aboutme',
-      contact: '#contact',
-      pricing: '#pricing',
+      aboutMe: 'aboutme',
+      contact: 'contact',
+      pricing: 'pricing',
     },
   },
 }
