@@ -1,4 +1,5 @@
-import { Box, HStack, Link, Stack, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, HStack, Stack, Text, useColorModeValue } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 import { Logo } from './Logo'
 import { getMenuItems } from '../utils/urls'
 import React from 'react'
@@ -30,8 +31,8 @@ export const Header = () => {
           <Stack direction={'row'} align={'center'}>
             {menuItems.map(menuItem => {
               return menuItem.isAvailable ? (
-                <Link key={menuItem.id} href={menuItem.url} p={4}>
-                  <Text fontSize={'3xl'} as={'b'}>
+                <Link key={menuItem.id} to={menuItem.url}>
+                  <Text fontSize={'3xl'} as={'b'} p={4}>
                     {menuItem.title}
                   </Text>
                 </Link>

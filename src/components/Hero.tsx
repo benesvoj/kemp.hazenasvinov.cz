@@ -9,6 +9,8 @@ import {
   createIcon,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
+import { urls } from '../utils/urls'
 import Head from 'next/head'
 
 export const Hero = () => {
@@ -59,10 +61,10 @@ export const Hero = () => {
                 bg: 'green.500',
               }}
             >
-              Přihlas se
+              <Link to={urls.website.sections.pricing}>Přihlas se</Link>
             </Button>
             <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
-              Chceš se dozvědět více?
+              <Link to={urls.website.sections.aboutMe}>Chceš se dozvědět více?</Link>
             </Button>
             <Box>
               <Icon

@@ -1,12 +1,13 @@
 import { Box, Heading, Stack, Text, VStack } from '@chakra-ui/react'
 import { PriceSelection } from './PriceSelection'
 import { getCamps } from '../utils/campList'
+import { urls } from '../utils/urls'
 
 export const Pricing = () => {
   const camps = getCamps()
 
   return (
-    <Box py={12}>
+    <Box py={12} id={urls.website.sections.pricing}>
       <VStack spacing={2} textAlign='center'>
         <Heading as='h1' fontSize='4xl'>
           Kempy a soustředění

@@ -1,5 +1,6 @@
 import { Box, Center, Flex, HStack, Heading, Text, VStack } from '@chakra-ui/react'
-import { useRouteError } from 'react-router-dom'
+import { Link, useRouteError } from 'react-router-dom'
+import { urls } from '../utils/urls'
 import React from 'react'
 
 type RouteError = {
@@ -19,6 +20,7 @@ export const ErrorPage = () => {
         <Text>
           <i>{error.statusText || error.message}</i>
         </Text>
+        <Link to={urls.website.link}>Zpět na hlavní stránku</Link>
       </Box>
     </Flex>
   )
