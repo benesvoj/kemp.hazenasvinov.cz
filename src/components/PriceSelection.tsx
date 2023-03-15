@@ -18,6 +18,8 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Radio,
+  RadioGroup,
   Text,
   VStack,
   useColorModeValue,
@@ -156,54 +158,53 @@ export const PriceSelection = (props: PriceSelectionProps) => {
           <ModalHeader>Přihláška</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Grid templateColumns='repeat(2, 1fr)' gap={6}>
-              <GridItem>
+            <Grid>
+              <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Email:</FormLabel>
-                  <Input type={'email'} placeholder={'email@email.cz'} />
-                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                  <Input type={'email'} placeholder={'email@email.cz'} isRequired />
                 </FormControl>
               </GridItem>
-              <GridItem>
+              <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Telefon:</FormLabel>
                   <Input type={'tel'} placeholder={'777123456'} />
-                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
                 </FormControl>
               </GridItem>
-              <GridItem>
+              <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Jméno a příjmení dítěte:</FormLabel>
                   <Input type={'text'} placeholder={'Josef Novák'} />
-                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
                 </FormControl>
               </GridItem>
-              <GridItem>
+              <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Datum narození:</FormLabel>
-                  <Input type={'date'} placeholder={'Josef Novák'} />
-                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                  <Input type={'date'} />
                 </FormControl>
               </GridItem>
-              <GridItem>
-                <FormControl>
-                  <FormLabel>Soustředění:</FormLabel>
-                  <Input type={'text'} placeholder={'Josef Novák'} />
-                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
-                </FormControl>
-              </GridItem>
-              <GridItem>
+              <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Třída ZŠ:</FormLabel>
-                  <Input type={'text'} placeholder={'Josef Novák'} />
-                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                  <Input type={'text'} placeholder={'5.třída'} />
                 </FormControl>
               </GridItem>
-              <GridItem>
+              <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Doplňující informace (alergie, jídlo, ...):</FormLabel>
-                  <Input type={'text'} placeholder={'Josef Novák'} />
-                  <FormHelperText>Pro účely kontaktování.</FormHelperText>
+                  <Input type={'text'} placeholder={'Alergický na lepek, laktózu, jahody.'} />
+                </FormControl>
+              </GridItem>
+              <GridItem pb={'4'}>
+                <FormControl>
+                  <FormLabel>Soustředění:</FormLabel>
+                  <RadioGroup defaultValue='kemp'>
+                    <HStack spacing='24px'>
+                      <Radio value='kemp'>Svinovský kemp</Radio>
+                      <Radio value='celostatko'>Celostátní soustředení</Radio>
+                      <Radio value='oboje'>Oboje</Radio>
+                    </HStack>
+                  </RadioGroup>
                 </FormControl>
               </GridItem>
             </Grid>

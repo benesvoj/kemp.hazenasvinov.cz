@@ -19,10 +19,15 @@ export const urls = {
       {
         id: 50,
         title: 'Přihlášky',
-        url: '#projects',
+        url: '#pricing',
         isAvailable: true,
       },
     ],
+    sections: {
+      aboutMe: '#aboutme',
+      contact: '#contact',
+      pricing: '#pricing',
+    },
   },
 }
 
