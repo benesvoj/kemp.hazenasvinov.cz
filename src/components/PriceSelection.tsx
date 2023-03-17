@@ -223,7 +223,7 @@ export const PriceSelection = (props: PriceSelectionProps) => {
 
           <ModalFooter>
             <Button variant='ghost' mr={3} onClick={onClose}>
-              Close
+              Zavrit
             </Button>
             <Button colorScheme='blue'>Odeslat</Button>
           </ModalFooter>

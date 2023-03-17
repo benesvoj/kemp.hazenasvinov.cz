@@ -7,7 +7,7 @@ export const Pricing = () => {
   const camps = getCamps()
 
   return (
-    <Box py={12} id={urls.website.sections.pricing} h={'100vh'}>
+    <Box py={12} id={'pricing'} h={'100vh'}>
       <Container maxW={'3xl'} h={'100vh'}>
         <Flex h={'100%'} w={'100%'} alignItems={'center'} justifyContent={'center'}>
           <Stack>

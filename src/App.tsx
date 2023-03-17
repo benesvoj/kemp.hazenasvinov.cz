@@ -8,9 +8,13 @@ import { InstagramFeed } from './components/InstagramFeed'
 import { Pricing } from './components/Pricing'
 import { ScrollToTop } from './components/ScrollToTop/ScrollToTop'
 import { Testimonials } from './components/Testimonials'
-import React from 'react'
+import React, { useRef } from 'react'
 
 export const App = () => {
+  const aboutMeRef = useRef(null)
+  const pricingRef = useRef(null)
+  const contactRef = useRef(null)
+
   return (
     <div className='App'>
       <ScrollToTop />

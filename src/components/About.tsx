@@ -3,7 +3,7 @@ import { urls } from '../utils/urls'
 
 export const About = () => {
   return (
-    <Container maxW={'3xl'} id={urls.website.sections.aboutMe} h={'100vh'}>
+    <Container maxW={'3xl'} id={'aboutme'} h={'100vh'}>
       <Flex h={'100%'} w={'100%'} alignItems={'center'} justifyContent={'center'}>
         <Stack
           as={Box}

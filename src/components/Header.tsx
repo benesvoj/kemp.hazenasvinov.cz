@@ -7,6 +7,13 @@ import React from 'react'
 export const Header = () => {
   const menuItems = getMenuItems()
 
+  const scrollDown = (ref: any) => {
+    window.scrollTo({
+      top: ref.offsetTop,
+      behavior: 'smooth',
+    })
+  }
+
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.700')}>
       <HStack
@@ -24,7 +31,11 @@ export const Header = () => {
           <Stack direction={'row'} align={'center'}>
             {menuItems.map(menuItem => {
               return menuItem.isAvailable ? (
-                <Link key={menuItem.id} to={menuItem.url}>
+                <Link
+                  key={menuItem.id}
+                  to={menuItem.url}
+                  scroll={el => el.scrollIntoView({ behavior: 'smooth' })}
+                >
                   <Text fontSize={'3xl'} as={'b'} p={4}>
                     {menuItem.title}
                   </Text>
