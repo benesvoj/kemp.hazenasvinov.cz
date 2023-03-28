@@ -1,6 +1,7 @@
 import logoImage from '../assets/logo-100.svg'
 export const urls = {
   website: {
+    hazenaSvinov: 'www.hazenasvinov.cz',
     link: '/',
     logo: logoImage,
     menuNavigation: [

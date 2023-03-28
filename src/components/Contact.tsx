@@ -31,7 +31,7 @@ export const Contact = () => {
                 <GridItem pb={4}>
                   <FormControl>
                     <FormLabel>Email</FormLabel>
-                    <Input type={'email'} />
+                    <Input type={'email'} placeholder={'email@email.cz'} />
                   </FormControl>
                 </GridItem>
                 <GridItem pb={4}>

@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { Logo } from './Logo'
+import { MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { ReactNode } from 'react'
 
 const SocialButton = ({
@@ -69,6 +70,12 @@ export const Footer = () => {
           </SocialButton>
           <SocialButton label={'Instagram'} href={'#'}>
             <FaInstagram />
+          </SocialButton>
+        </Stack>
+        |
+        <Stack direction={'row'} spacing={6}>
+          <SocialButton label={'Administrace'} href={'/admin'}>
+            <MdOutlineAdminPanelSettings />
           </SocialButton>
         </Stack>
       </Container>

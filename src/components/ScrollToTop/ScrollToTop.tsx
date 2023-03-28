@@ -14,7 +14,7 @@ export const ScrollToTop = () => {
       }
     })
   }, [])
-  const goToTop = () => {
+  const GoToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -23,7 +23,7 @@ export const ScrollToTop = () => {
   return (
     <div className='top-to-btm'>
       {' '}
-      {showTopBtn && <FaAngleUp className='icon-position icon-style' onClick={goToTop} />}{' '}
+      {showTopBtn && <FaAngleUp className='icon-position icon-style' onClick={GoToTop} />}{' '}
     </div>
   )
 }
