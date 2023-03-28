@@ -28,7 +28,7 @@ import {
 import { BsCalendarDate } from 'react-icons/bs'
 import { FaCampground, FaCheckCircle, FaSortAmountDown } from 'react-icons/fa'
 import { GiAges } from 'react-icons/gi'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import { isNotNilOrEmpty } from 'ramda-adjunct'
 
 export type PriceSelectionProps = {
@@ -87,6 +87,25 @@ function PriceWrapper({ children }: { children: ReactNode }) {
 }
 export const PriceSelection = (props: PriceSelectionProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const [formData, setFormData] = useState({})
+
+  const updateFormData = (e: { target: { name: string; value: string } }) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const submit = (e: { preventDefault: () => void }) => {
+    e.preventDefault()
+    console.log(formData)
+    onClose()
+  }
+
+  const handleClick = () => {
+    console.log('Clicked!')
+  }
 
   return (
     <>
@@ -166,44 +185,70 @@ export const PriceSelection = (props: PriceSelectionProps) => {
       <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Přihláška</ModalHeader>
+          <ModalHeader>Přihláška na {}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Grid>
               <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Email:</FormLabel>
-                  <Input type={'email'} placeholder={'email@email.cz'} isRequired />
+                  <Input
+                    type={'email'}
+                    name={'email'}
+                    placeholder={'email@email.cz'}
+                    onChange={updateFormData}
+                    isRequired
+                  />
                 </FormControl>
               </GridItem>
               <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Telefon:</FormLabel>
-                  <Input type={'tel'} placeholder={'777123456'} />
+                  <Input
+                    type={'tel'}
+                    name={'tel'}
+                    placeholder={'777123456'}
+                    onChange={updateFormData}
+                  />
                 </FormControl>
               </GridItem>
               <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Jméno a příjmení dítěte:</FormLabel>
-                  <Input type={'text'} placeholder={'Josef Novák'} />
+                  <Input
+                    type={'text'}
+                    name={'name'}
+                    placeholder={'Josef Novák'}
+                    onChange={updateFormData}
+                  />
                 </FormControl>
               </GridItem>
               <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Datum narození:</FormLabel>
-                  <Input type={'date'} />
+                  <Input type={'date'} name={'birthdate'} onChange={updateFormData} />
                 </FormControl>
               </GridItem>
               <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Třída ZŠ:</FormLabel>
-                  <Input type={'text'} placeholder={'5.třída'} />
+                  <Input
+                    type={'text'}
+                    placeholder={'5.třída'}
+                    name={'classRoom'}
+                    onChange={updateFormData}
+                  />
                 </FormControl>
               </GridItem>
               <GridItem pb={'4'}>
                 <FormControl>
                   <FormLabel>Doplňující informace (alergie, jídlo, ...):</FormLabel>
-                  <Input type={'text'} placeholder={'Alergický na lepek, laktózu, jahody.'} />
+                  <Input
+                    type={'text'}
+                    placeholder={'Alergický na lepek, laktózu, jahody.'}
+                    name={'note'}
+                    onChange={updateFormData}
+                  />
                 </FormControl>
               </GridItem>
               <GridItem pb={'4'}>
@@ -211,9 +256,15 @@ export const PriceSelection = (props: PriceSelectionProps) => {
                   <FormLabel>Soustředění:</FormLabel>
                   <RadioGroup defaultValue='kemp'>
                     <HStack spacing='24px'>
-                      <Radio value='kemp'>Svinovský kemp</Radio>
-                      <Radio value='celostatko'>Celostátní soustředení</Radio>
-                      <Radio value='oboje'>Oboje</Radio>
+                      <Radio value='kemp' name={'svinovCamp'} onChange={updateFormData}>
+                        Svinovský kemp
+                      </Radio>
+                      <Radio value='celostatko' name={'snh'} onChange={updateFormData}>
+                        Celostátní soustředení
+                      </Radio>
+                      <Radio value='oboje' name={'both'} onChange={updateFormData}>
+                        Oboje
+                      </Radio>
                     </HStack>
                   </RadioGroup>
                 </FormControl>
@@ -225,7 +276,9 @@ export const PriceSelection = (props: PriceSelectionProps) => {
             <Button variant='ghost' mr={3} onClick={onClose}>
               Zavrit
             </Button>
-            <Button colorScheme='blue'>Odeslat</Button>
+            <Button colorScheme='blue' type={'submit'} onClick={submit}>
+              Odeslat
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
