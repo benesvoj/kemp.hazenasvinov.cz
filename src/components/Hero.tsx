@@ -15,16 +15,6 @@ import { getMenuItems, urls } from "../utils/urls";
 import Head from "next/head";
 
 export const Hero = () => {
-  const menuItems = getMenuItems();
-
-  const getProperMenuLink = (props: number) => {
-    let result = menuItems.find((menu) => {
-      return menu.id === props;
-    });
-    console.log(result);
-    return !result!.url ? result!.url : urls.website.link;
-  };
-
   return (
     <>
       <Head>
@@ -78,14 +68,20 @@ export const Hero = () => {
                   bg: "green.500",
                 }}
               >
-                {/*TODO predelat do vice dynamicky*/}
-                {/*<Link to={getProperMenuLink(50)}>Přihlas se</Link>*/}
-                <Link to={"#pricing"}>Přihlas se</Link>
+                <Link
+                  to={"#pricing"}
+                  scroll={(el) => el.scrollIntoView({ behavior: "smooth" })}
+                >
+                  Přihlas se
+                </Link>
               </Button>
               <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
-                {/*TODO predelat do vice dynamicky*/}
-                <Link to={"#aboutme"}>Chceš se dozvědět více?</Link>
-                {/*<Link to={getProperMenuLink(20)}>Chceš se dozvědět více?</Link>*/}
+                <Link
+                  to={"#aboutme"}
+                  scroll={(el) => el.scrollIntoView({ behavior: "smooth" })}
+                >
+                  Chceš se dozvědět více?
+                </Link>
               </Button>
               <Box>
                 <Icon

@@ -7,13 +7,6 @@ import React from "react";
 export const Header = () => {
   const menuItems = getMenuItems();
 
-  const scrollDown = (ref: any) => {
-    window.scrollTo({
-      top: ref.offsetTop,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <Box bg={useColorModeValue("gray.100", "gray.700")}>
       <HStack
