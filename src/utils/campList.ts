@@ -10,6 +10,7 @@ const campList = [
     place: "Stará Ves nad Ondřejnicí",
     ageFrom: 6,
     ageTo: 15,
+    limitTo: 40,
     theme: "nevim",
   },
   {

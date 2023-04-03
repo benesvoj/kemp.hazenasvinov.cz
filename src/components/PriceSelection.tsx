@@ -67,6 +67,8 @@ export const PriceSelection = (props: PriceSelectionProps) => {
 
   const [formData, setFormData] = useState({});
 
+  const [countParticipants, setCountParticipants] = useState();
+
   const updateFormData = (e: {
     target: { name: string; value: string | null };
   }) => {
@@ -106,7 +108,7 @@ export const PriceSelection = (props: PriceSelectionProps) => {
   const submit = (e: { preventDefault: () => void }) => {
     console.log("formData", formData);
 
-    fetch(`${process.env.REACT_APP_API_URL}` + "/api/participants", {
+    fetch(`${process.env.REACT_APP_API_URL}/api/participants`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(formData),
@@ -236,7 +238,7 @@ export const PriceSelection = (props: PriceSelectionProps) => {
                   <FormLabel>Jméno a příjmení dítěte:</FormLabel>
                   <Input
                     type={"text"}
-                    name={"name"}
+                    name={"childName"}
                     placeholder={"Josef Novák"}
                     onChange={updateFormData}
                   />
