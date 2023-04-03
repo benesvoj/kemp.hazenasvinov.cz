@@ -75,13 +75,18 @@ export const PriceSelection = (props: PriceSelectionProps) => {
   const submit = (e: { preventDefault: () => void }) => {
     console.log("formData", formData);
 
-    fetch("http://localhost:3001/participants", {
+    fetch(`${process.env.REACT_APP_API_URL}`+'/api/participants', {
+    // fetch(`http://localhost:3001/api/participants`, {
       method: "POST",
+      headers: { "Content-type": "application/json" },
       body: JSON.stringify(formData),
-    }).then(function (response) {
+    })
+      .then(function (response) {
       console.log("response", response);
       return response.json();
-    });
+    })
+      .catch(err => console.log(err))
+
     e.preventDefault();
 
     onClose();

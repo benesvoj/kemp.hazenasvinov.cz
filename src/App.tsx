@@ -1,6 +1,5 @@
 import './App.css'
 import { About } from './components/About'
-import { AuthContext } from './context/AuthContext'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
@@ -9,7 +8,6 @@ import { InstagramFeed } from './components/InstagramFeed'
 import { Pricing } from './components/Pricing'
 import { ScrollToTop } from './components/ScrollToTop/ScrollToTop'
 import { Testimonials } from './components/Testimonials'
-import { useAuth } from './hooks/useAuth'
 import React from 'react'
 
 export const App = () => {
