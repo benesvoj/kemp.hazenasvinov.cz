@@ -65,7 +65,7 @@ export const PriceSelection = (props: PriceSelectionProps) => {
 
   const [formData, setFormData] = useState({});
 
-  const updateFormData = (e: { target: { name: string; value: string } }) => {
+  const updateFormData = (e: { target: { name: string; value: string | null } }) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -75,7 +75,7 @@ export const PriceSelection = (props: PriceSelectionProps) => {
   const submit = (e: { preventDefault: () => void }) => {
     console.log("formData", formData);
 
-    fetch("http://localhost:3001/api/participants", {
+    fetch("http://localhost:3001/participants", {
       method: "POST",
       body: JSON.stringify(formData),
     }).then(function (response) {
