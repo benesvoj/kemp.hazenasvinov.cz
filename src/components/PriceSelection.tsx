@@ -1,3 +1,4 @@
+import "react-toastify/dist/ReactToastify.css";
 import {
   Box,
   Button,
@@ -28,6 +29,7 @@ import { BsCalendarDate } from "react-icons/bs";
 import { FaCampground, FaCheckCircle, FaSortAmountDown } from "react-icons/fa";
 import { GiAges } from "react-icons/gi";
 import { ReactNode, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { isNotNilOrEmpty } from "ramda-adjunct";
 
 export type PriceSelectionProps = {
@@ -65,27 +67,55 @@ export const PriceSelection = (props: PriceSelectionProps) => {
 
   const [formData, setFormData] = useState({});
 
-  const updateFormData = (e: { target: { name: string; value: string | null } }) => {
+  const updateFormData = (e: {
+    target: { name: string; value: string | null };
+  }) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
+  const successNotification = () => {
+    toast.success("Registrace provedena.", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    return (
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    );
+  };
+
   const submit = (e: { preventDefault: () => void }) => {
     console.log("formData", formData);
 
-    fetch(`${process.env.REACT_APP_API_URL}`+'/api/participants', {
-    // fetch(`http://localhost:3001/api/participants`, {
+    fetch(`${process.env.REACT_APP_API_URL}` + "/api/participants", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(formData),
     })
       .then(function (response) {
-      console.log("response", response);
-      return response.json();
-    })
-      .catch(err => console.log(err))
+        console.log("response", response);
+        return response.json();
+      })
+      .catch((err) => console.log(err));
 
     e.preventDefault();
 
