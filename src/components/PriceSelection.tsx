@@ -18,8 +18,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Radio,
-  RadioGroup,
   Text,
   VStack,
   useColorModeValue,
@@ -31,6 +29,7 @@ import { GiAges } from "react-icons/gi";
 import { ReactNode, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { isNotNilOrEmpty } from "ramda-adjunct";
+import update = toast.update;
 
 export type PriceSelectionProps = {
   id: number;
@@ -67,10 +66,10 @@ export const PriceSelection = (props: PriceSelectionProps) => {
 
   const [formData, setFormData] = useState({});
 
-  const [countParticipants, setCountParticipants] = useState();
+  // const [countParticipants, setCountParticipants] = useState();
 
   const updateFormData = (e: {
-    target: { name: string; value: string | null };
+    target: { name: string; value: string | number | null };
   }) => {
     setFormData({
       ...formData,
@@ -106,8 +105,11 @@ export const PriceSelection = (props: PriceSelectionProps) => {
   };
 
   const submit = (e: { preventDefault: () => void }) => {
-    console.log("formData", formData);
+    updateFormData({
+      target: { name: "selectedCamp", value: props.id },
+    });
 
+    console.log("formData", formData);
     fetch(`${process.env.REACT_APP_API_URL}/api/participants`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -186,10 +188,10 @@ export const PriceSelection = (props: PriceSelectionProps) => {
                   Téma: {props.theme}
                 </ListItem>
               ) : null}
-              {isNotNilOrEmpty(props.limitTo) ? (
+              {isNotNilOrEmpty(props.limitTo || props.limitFrom) ? (
                 <ListItem>
                   <ListIcon as={FaSortAmountDown} color={"green.500"} />
-                  Limit: {props.limitFrom} / {props.limitTo}
+                  Počet přihlášených: {props.limitFrom} z {props.limitTo}
                 </ListItem>
               ) : null}
               <ListItem>{props.description}</ListItem>
@@ -206,7 +208,7 @@ export const PriceSelection = (props: PriceSelectionProps) => {
       <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Přihláška</ModalHeader>
+          <ModalHeader>Přihláška na {props.title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Grid>
@@ -278,42 +280,12 @@ export const PriceSelection = (props: PriceSelectionProps) => {
                   />
                 </FormControl>
               </GridItem>
-              <GridItem pb={"4"}>
-                <FormControl>
-                  <FormLabel>Soustředění:</FormLabel>
-                  <RadioGroup defaultValue="kemp">
-                    <HStack spacing="24px">
-                      <Radio
-                        value="kemp"
-                        name={"selectedCamp"}
-                        onChange={updateFormData}
-                      >
-                        Svinovský kemp
-                      </Radio>
-                      <Radio
-                        value="celostatko"
-                        name={"selectedCamp"}
-                        onChange={updateFormData}
-                      >
-                        Celostátní soustředení
-                      </Radio>
-                      <Radio
-                        value="oboje"
-                        name={"selectedCamp"}
-                        onChange={updateFormData}
-                      >
-                        Oboje
-                      </Radio>
-                    </HStack>
-                  </RadioGroup>
-                </FormControl>
-              </GridItem>
             </Grid>
           </ModalBody>
 
           <ModalFooter>
             <Button variant="ghost" mr={3} onClick={onClose}>
-              Zavrit
+              Zrušit
             </Button>
             <Button colorScheme="blue" type={"submit"} onClick={submit}>
               Odeslat
