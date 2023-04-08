@@ -43,24 +43,26 @@ export const Pricing = () => {
               spacing={{ base: 4, lg: 10 }}
               py={10}
             >
-              {camps.map((camp) => {
-                return (
-                  <PriceSelection
-                    key={camp.id}
-                    id={camp.id}
-                    isPopular={camp.isPopular}
-                    title={camp.name}
-                    description={camp.description}
-                    price={camp.price}
-                    dateFrom={camp.dateFrom}
-                    dateTo={camp.dateTo}
-                    place={camp.place}
-                    ageFrom={camp.ageFrom}
-                    ageTo={camp.ageTo}
-                    // limitFrom={getParticipantsCount(camp.id)}
-                  />
-                );
-              })}
+              {!camps.length
+                ? camps.map((camp) => {
+                    return (
+                      <PriceSelection
+                        key={camp.id}
+                        id={camp.id}
+                        isPopular={camp.isPopular}
+                        title={camp.name}
+                        description={camp.description}
+                        price={camp.price}
+                        dateFrom={camp.dateFrom}
+                        dateTo={camp.dateTo}
+                        place={camp.place}
+                        ageFrom={camp.ageFrom}
+                        ageTo={camp.ageTo}
+                        // limitFrom={getParticipantsCount(camp.id)}
+                      />
+                    );
+                  })
+                : null}
             </Stack>
           </Stack>
         </Flex>
