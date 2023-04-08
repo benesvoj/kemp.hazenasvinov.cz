@@ -8,35 +8,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { PriceSelection } from "./PriceSelection";
-import { SelectedCamp } from "../types/types";
-import { getCamps } from "../utils/campList";
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import axios from "axios";
+import { getCamps } from "../api/camps";
+import { getParticipantsCount } from "../api/participants";
 
 export const Pricing = () => {
   const camps = getCamps();
-
-  const getParticipantsCount = (id: number) => {
-    const [count, setCount] = useState<SelectedCamp[]>([]);
-
-    const getParticipants = async () => {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/participants`,
-        {
-          params: { selectedCamp: id },
-        }
-      );
-      setCount(data);
-      console.log("getParticipants", data);
-    };
-
-    useEffect(() => {
-      getParticipants();
-    }, []);
-
-    return count.length;
-  };
 
   return (
     <Box py={12} id={"pricing"} h={"100vh"}>
@@ -73,15 +49,15 @@ export const Pricing = () => {
                     key={camp.id}
                     id={camp.id}
                     isPopular={camp.isPopular}
-                    title={camp.title}
+                    title={camp.name}
                     description={camp.description}
                     price={camp.price}
-                    currency={camp.currency}
-                    date={camp.date}
+                    dateFrom={camp.dateFrom}
+                    dateTo={camp.dateTo}
                     place={camp.place}
                     ageFrom={camp.ageFrom}
                     ageTo={camp.ageTo}
-                    limitFrom={getParticipantsCount(camp.id)}
+                    // limitFrom={getParticipantsCount(camp.id)}
                   />
                 );
               })}

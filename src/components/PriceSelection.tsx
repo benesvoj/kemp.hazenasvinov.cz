@@ -1,4 +1,3 @@
-import "react-toastify/dist/ReactToastify.css";
 import {
   Box,
   Button,
@@ -27,19 +26,17 @@ import { BsCalendarDate } from "react-icons/bs";
 import { FaCampground, FaCheckCircle, FaSortAmountDown } from "react-icons/fa";
 import { GiAges } from "react-icons/gi";
 import { ReactNode, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import { isNotNilOrEmpty } from "ramda-adjunct";
-import update = toast.update;
 
 export type PriceSelectionProps = {
   id: number;
-  isPopular: boolean;
+  isPopular?: boolean;
   title: string;
   description: string;
   price: number;
-  currency: string;
-  date: string;
-  place: string;
+  dateFrom: number;
+  dateTo?: string;
+  place: string | null;
   ageFrom: number;
   ageTo: number;
   theme?: string | null;
@@ -77,49 +74,22 @@ export const PriceSelection = (props: PriceSelectionProps) => {
     });
   };
 
-  const successNotification = () => {
-    toast.success("Registrace provedena.", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-    return (
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-    );
-  };
-
   const submit = (e: { preventDefault: () => void }) => {
     updateFormData({
       target: { name: "selectedCamp", value: props.id },
     });
 
-    console.log("formData", formData);
+    window.console.log("formData", formData);
     fetch(`${process.env.REACT_APP_API_URL}/api/participants`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(formData),
     })
       .then(function (response) {
-        console.log("response", response);
+        window.console.log("response", response);
         return response.json();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => window.console.log(err));
 
     e.preventDefault();
 
@@ -160,7 +130,7 @@ export const PriceSelection = (props: PriceSelectionProps) => {
                 {props.price}
               </Text>
               <Text fontSize="3xl" fontWeight="600">
-                {props.currency}
+                Kč
               </Text>
             </HStack>
           </Box>
@@ -172,12 +142,14 @@ export const PriceSelection = (props: PriceSelectionProps) => {
             <List spacing={3} textAlign="start" px={12}>
               <ListItem>
                 <ListIcon as={BsCalendarDate} color="green.500" />
-                Termín: {props.date}
+                Termín: {props.dateFrom} - {props.dateTo}
               </ListItem>
-              <ListItem>
-                <ListIcon as={FaCampground} color="green.500" />
-                Místo: {props.place}
-              </ListItem>
+              {isNotNilOrEmpty(props.place) ? (
+                <ListItem>
+                  <ListIcon as={FaCampground} color="green.500" />
+                  Místo: {props.place}
+                </ListItem>
+              ) : null}
               <ListItem>
                 <ListIcon as={GiAges} color="green.500" />
                 Věk: {props.ageFrom} - {props.ageTo} let
