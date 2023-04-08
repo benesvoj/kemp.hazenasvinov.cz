@@ -1,12 +1,4 @@
-import {
-  Box,
-  Center,
-  Flex,
-  HStack,
-  Heading,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { Link, useRouteError } from "react-router-dom";
 import { urls } from "../utils/urls";
 import React from "react";
@@ -18,7 +10,7 @@ type RouteError = {
 
 export const ErrorPage = () => {
   const error = useRouteError() as RouteError;
-  console.error(error);
+  window.console.error(error);
 
   return (
     <Flex

@@ -8,8 +8,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { PriceSelection } from "./PriceSelection";
-import { getCamps } from "../utils/campList";
-import { urls } from "../utils/urls";
+import { getCamps } from "../api/camps";
+import { getParticipantsCount } from "../api/participants";
 
 export const Pricing = () => {
   const camps = getCamps();
@@ -43,23 +43,26 @@ export const Pricing = () => {
               spacing={{ base: 4, lg: 10 }}
               py={10}
             >
-              {camps.map((camp) => {
-                return (
-                  <PriceSelection
-                    key={camp.id}
-                    id={camp.id}
-                    isPopular={camp.isPopular}
-                    title={camp.title}
-                    description={camp.description}
-                    price={camp.price}
-                    currency={camp.currency}
-                    date={camp.date}
-                    place={camp.place}
-                    ageFrom={camp.ageFrom}
-                    ageTo={camp.ageTo}
-                  />
-                );
-              })}
+              {!camps.length
+                ? camps.map((camp) => {
+                    return (
+                      <PriceSelection
+                        key={camp.id}
+                        id={camp.id}
+                        isPopular={camp.isPopular}
+                        title={camp.name}
+                        description={camp.description}
+                        price={camp.price}
+                        dateFrom={camp.dateFrom}
+                        dateTo={camp.dateTo}
+                        place={camp.place}
+                        ageFrom={camp.ageFrom}
+                        ageTo={camp.ageTo}
+                        // limitFrom={getParticipantsCount(camp.id)}
+                      />
+                    );
+                  })
+                : null}
             </Stack>
           </Stack>
         </Flex>
