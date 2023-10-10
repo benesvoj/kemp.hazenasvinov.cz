@@ -1,22 +1,9 @@
 import {
   Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Grid,
-  GridItem,
   HStack,
-  Input,
   List,
   ListIcon,
   ListItem,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Text,
   VStack,
   useColorModeValue,
@@ -26,19 +13,20 @@ import { BsCalendarDate } from "react-icons/bs";
 import { FaCampground, FaCheckCircle, FaSortAmountDown } from "react-icons/fa";
 import { GiAges } from "react-icons/gi";
 import { ReactNode, useState } from "react";
+import { Button as StyledButton } from "./Button/Button";
 import { isNotNilOrEmpty } from "ramda-adjunct";
 
 export type PriceSelectionProps = {
-  id: number;
+  id?: number;
   isPopular?: boolean;
-  title: string;
-  description: string;
-  price: number;
-  dateFrom: number;
+  title?: string;
+  description?: string;
+  price?: number;
+  dateFrom?: number;
   dateTo?: string;
-  place: string | null;
-  ageFrom: number;
-  ageTo: number;
+  place?: string | null;
+  ageFrom?: number;
+  ageTo?: number;
   theme?: string | null;
   limitFrom?: number | null;
   limitTo?: number | null;
@@ -59,43 +47,6 @@ function PriceWrapper({ children }: { children: ReactNode }) {
   );
 }
 export const PriceSelection = (props: PriceSelectionProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [formData, setFormData] = useState({});
-
-  // const [countParticipants, setCountParticipants] = useState();
-
-  const updateFormData = (e: {
-    target: { name: string; value: string | number | null };
-  }) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const submit = (e: { preventDefault: () => void }) => {
-    updateFormData({
-      target: { name: "selectedCamp", value: props.id },
-    });
-
-    window.console.log("formData", formData);
-    fetch(`${process.env.REACT_APP_API_URL}/api/participants`, {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(formData),
-    })
-      .then(function (response) {
-        window.console.log("response", response);
-        return response.json();
-      })
-      .catch((err) => window.console.log(err));
-
-    e.preventDefault();
-
-    onClose();
-  };
-
   return (
     <>
       <PriceWrapper>
@@ -168,103 +119,12 @@ export const PriceSelection = (props: PriceSelectionProps) => {
               ) : null}
               <ListItem>{props.description}</ListItem>
             </List>
-            <Box w="80%" pt={7}>
-              <Button w="full" colorScheme="red" onClick={onOpen}>
-                Přihlas se
-              </Button>
+            <Box pt={7}>
+              <StyledButton>Přihlas se</StyledButton>
             </Box>
           </VStack>
         </Box>
       </PriceWrapper>
-
-      <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Přihláška na {props.title}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Grid>
-              <GridItem pb={"4"}>
-                <FormControl>
-                  <FormLabel>Email:</FormLabel>
-                  <Input
-                    type={"email"}
-                    name={"email"}
-                    placeholder={"email@email.cz"}
-                    onChange={updateFormData}
-                    isRequired
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem pb={"4"}>
-                <FormControl>
-                  <FormLabel>Telefon:</FormLabel>
-                  <Input
-                    type={"tel"}
-                    name={"phone"}
-                    placeholder={"777123456"}
-                    onChange={updateFormData}
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem pb={"4"}>
-                <FormControl>
-                  <FormLabel>Jméno a příjmení dítěte:</FormLabel>
-                  <Input
-                    type={"text"}
-                    name={"childName"}
-                    placeholder={"Josef Novák"}
-                    onChange={updateFormData}
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem pb={"4"}>
-                <FormControl>
-                  <FormLabel>Datum narození:</FormLabel>
-                  <Input
-                    type={"date"}
-                    name={"birthdate"}
-                    onChange={updateFormData}
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem pb={"4"}>
-                <FormControl>
-                  <FormLabel>Třída ZŠ:</FormLabel>
-                  <Input
-                    type={"text"}
-                    placeholder={"5.třída"}
-                    name={"classRoom"}
-                    onChange={updateFormData}
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem pb={"4"}>
-                <FormControl>
-                  <FormLabel>
-                    Doplňující informace (alergie, jídlo, ...):
-                  </FormLabel>
-                  <Input
-                    type={"text"}
-                    placeholder={"Alergický na lepek, laktózu, jahody."}
-                    name={"note"}
-                    onChange={updateFormData}
-                  />
-                </FormControl>
-              </GridItem>
-            </Grid>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button variant="ghost" mr={3} onClick={onClose}>
-              Zrušit
-            </Button>
-            <Button colorScheme="blue" type={"submit"} onClick={submit}>
-              Odeslat
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </>
   );
 };

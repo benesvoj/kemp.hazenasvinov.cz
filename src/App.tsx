@@ -14,14 +14,20 @@ export const App = () => {
   return (
     <div className="App">
       <ScrollToTop />
-      <Header />
-      <Hero />
-      <InstagramFeed />
-      <About />
-      <Testimonials />
-      <Pricing />
-      <Contact />
-      <Footer />
+      <header>
+        <Header />
+      </header>
+      <main>
+        <Hero />
+        <InstagramFeed />
+        <About />
+        <Testimonials />
+        <Pricing />
+        <Contact />
+      </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 };

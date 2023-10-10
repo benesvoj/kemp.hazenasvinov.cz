@@ -6,6 +6,7 @@ import { router } from "./routes/router";
 import GlobalStyle from "./globalStyles";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Theme from "./theme";
 
 const queryClient = new QueryClient();
 
@@ -17,9 +18,11 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
-      <ChakraProvider>
-        <RouterProvider router={router} />
-      </ChakraProvider>
+      <Theme>
+        <ChakraProvider>
+          <RouterProvider router={router} />
+        </ChakraProvider>
+      </Theme>
     </QueryClientProvider>
   </React.StrictMode>
 );

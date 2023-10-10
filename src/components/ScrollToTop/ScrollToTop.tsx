@@ -46,22 +46,22 @@ const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #38a169;
+  background-color: ${(props) => props.theme.color.primary};
   border-radius: 50%;
   height: 50px;
   width: 50px;
-  color: #fff;
+  color: ${(props) => props.theme.color.secondary};
   cursor: pointer;
   animation: move-btn 3s ease-in-out infinite;
   transition: all 0.5s ease-in-out;
   position: fixed;
   bottom: 40px;
   left: 50%;
-  z-index: 20;
+  z-index: 15;
   &:hover {
     animation: none;
-    background: #fff;
-    color: #38a169;
+    background: ${(props) => props.theme.color.secondary};
+    color: ${(props) => props.theme.color.primary};
   }
   @keyframes move-btn {
     0% {

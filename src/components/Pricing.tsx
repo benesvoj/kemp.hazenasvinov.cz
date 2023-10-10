@@ -8,10 +8,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { PriceSelection } from "./PriceSelection";
-import { getCamps } from "../api/camps";
+// import { getCamps } from "../api/camps";
+import { getCamps } from "../utils/campList";
 import { getParticipantsCount } from "../api/participants";
 
 export const Pricing = () => {
+  // const camps = getCamps();
   const camps = getCamps();
 
   return (
@@ -43,7 +45,7 @@ export const Pricing = () => {
               spacing={{ base: 4, lg: 10 }}
               py={10}
             >
-              {!camps.length
+              {camps.length
                 ? camps.map((camp) => {
                     return (
                       <PriceSelection
