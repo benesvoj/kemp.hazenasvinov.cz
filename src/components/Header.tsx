@@ -1,4 +1,4 @@
-import { Box, HStack, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, HStack, Stack, Text } from "@chakra-ui/react";
 import { HashLink as Link } from "react-router-hash-link";
 import { Logo } from "./Logo";
 import { getMenuItems } from "../utils/urls";
@@ -8,14 +8,14 @@ export const Header = () => {
   const menuItems = getMenuItems();
 
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.700")}>
+    <Box bg={"gray.700"} display={"flex"} justifyContent={"center"}>
       <HStack
         position={"fixed"}
         top={0}
         h={24}
         justifyContent={"space-between"}
         overflow={"hidden"}
-        w={"100%"}
+        w={"80%"}
         zIndex={1000}
       >
         <Logo />
