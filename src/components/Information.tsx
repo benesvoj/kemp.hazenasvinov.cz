@@ -1,17 +1,10 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Stack,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import { sections } from "../utils/urls";
 
-export const InstagramFeed = () => {
+export const Information = () => {
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.700")}>
-      <Container maxW={"3xl"} h={"100vh"}>
+    <Box id={sections.information} h={"100vh"} display={"flex"}>
+      <Container maxW={"3xl"}>
         <Flex
           h={"100%"}
           w={"100%"}
@@ -29,15 +22,12 @@ export const InstagramFeed = () => {
               fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
               lineHeight={"110%"}
             >
-              Instagram feed #svinovkemp
+              O kempu
             </Heading>
             <Text color={"gray.500"}>
               Týdenní kemp plný zážitků, nových přátel, sportovních aktivit a
               výletů! Poznej něco nového s naší partou.
             </Text>
-            <Box>
-              <figure data-behold-id="QGh7N1qqDw8lLMmVMbyg"></figure>
-            </Box>
           </Stack>
         </Flex>
       </Container>

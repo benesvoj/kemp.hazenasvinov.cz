@@ -67,7 +67,7 @@ export const Header = () => {
             />
           </Flex>
           <Flex flexDir="column" align="center">
-            <Menu />
+            <Menu onClick={() => changeDisplay("none")} />
           </Flex>
         </Flex>
       </HStack>

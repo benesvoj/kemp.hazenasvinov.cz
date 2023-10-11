@@ -56,7 +56,10 @@ const Button = styled.div`
   transition: all 0.5s ease-in-out;
   position: fixed;
   bottom: 40px;
-  left: 50%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   z-index: 15;
   &:hover {
     animation: none;

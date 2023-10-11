@@ -13,7 +13,7 @@ import { BsCalendarDate } from "react-icons/bs";
 import { FaCampground, FaCheckCircle, FaSortAmountDown } from "react-icons/fa";
 import { GiAges } from "react-icons/gi";
 import { ReactNode, useState } from "react";
-import { Button as StyledButton } from "./Button/Button";
+import { Button as StyledButton } from "../Button/Button";
 import { isNotNilOrEmpty } from "ramda-adjunct";
 
 export type PriceSelectionProps = {
@@ -46,7 +46,7 @@ function PriceWrapper({ children }: { children: ReactNode }) {
     </Box>
   );
 }
-export const PriceSelection = (props: PriceSelectionProps) => {
+export const PriceBox = (props: PriceSelectionProps) => {
   return (
     <>
       <PriceWrapper>

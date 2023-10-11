@@ -1,63 +1,81 @@
 import {
   Box,
-  Button,
   Container,
-  Flex,
-  FormControl,
-  FormLabel,
-  Grid,
-  GridItem,
+  HStack,
   Heading,
-  Input,
   Stack,
   Text,
-  Textarea,
-  useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
-import { urls } from "../utils/urls";
+import { Button as StyledButton } from "./Button/Button";
+import { sections } from "../utils/urls";
+import styled from "styled-components";
 
 export const Contact = () => {
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.700")} id={"contact"}>
-      <Container maxW={"7xl"} py={16} as={Stack} spacing={12} h={"100vh"}>
-        <Flex
-          h={"100%"}
-          w={"100%"}
-          alignItems={"center"}
-          justifyContent={"center"}
-        >
-          <Stack>
-            <Stack spacing={0} align={"center"}>
-              <Heading as={"h1"}>Kontaktujte nás</Heading>
-            </Stack>
-            <Text>
-              V pripade nejanostni nas nevahejte kontaktovat pro vice informaci
-            </Text>
-            <Stack
-              direction={{ base: "column", md: "row" }}
-              spacing={{ base: 10, md: 4, lg: 10 }}
-            >
-              <Grid w={"100%"}>
-                <GridItem pb={4}>
-                  <FormControl>
-                    <FormLabel>Email</FormLabel>
-                    <Input type={"email"} placeholder={"email@email.cz"} />
-                  </FormControl>
-                </GridItem>
-                <GridItem pb={4}>
-                  <FormControl>
-                    <FormLabel>Text zpravy:</FormLabel>
-                    <Textarea placeholder={"Zde nam muzete zanechat zpravu."} />
-                  </FormControl>
-                </GridItem>
-                <GridItem>
-                  <Button colorScheme={"blue"}>Odeslat</Button>
-                </GridItem>
-              </Grid>
-            </Stack>
-          </Stack>
-        </Flex>
+    <Box id={sections.contact} bg={"gray.700"} h={"100vh"} display={"flex"}>
+      <Container maxW={"7xl"} as={Stack} justifyContent={"center"}>
+        <VStack>
+          <Heading as={"h1"}>Kontaktujte nás</Heading>
+          <Text>
+            V pripade nejanostni nas nevahejte kontaktovat pro vice informaci
+          </Text>
+          <HStack w={350} justifyContent={"center"}>
+            <StyledForm>
+              <label>Email</label>
+              <StyledInput
+                id={"email"}
+                type={"email"}
+                placeholder={"email@email.cz"}
+              />
+              <label htmlFor={"email"}>Text zprávy</label>
+              <StyledTextarea
+                placeholder={"Zde nam muzete zanechat zpravu."}
+              ></StyledTextarea>
+              <StyledButtonWrapper>
+                <StyledButton>Odeslat</StyledButton>
+              </StyledButtonWrapper>
+            </StyledForm>
+          </HStack>
+        </VStack>
       </Container>
     </Box>
   );
 };
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+`;
+
+const StyledInput = styled.input`
+  padding: 0.5rem 1rem;
+  border-radius: ${(props) => props.theme.borderRadius.primary};
+  border: 1px solid ${(props) => props.theme.color.tertiary};
+  background: none;
+  width: 100%;
+  &:focus {
+    outline: none;
+    border: 1px solid ${(props) => props.theme.color.primary};
+  }
+`;
+
+const StyledTextarea = styled.textarea`
+  padding: 0.5rem 1rem;
+  border-radius: ${(props) => props.theme.borderRadius.primary};
+  border: 1px solid ${(props) => props.theme.color.tertiary};
+  background: none;
+  width: 100%;
+  height: 10rem;
+  &:focus {
+    outline: none;
+    border: 1px solid ${(props) => props.theme.color.primary};
+  }
+`;
+
+const StyledButtonWrapper = styled.div`
+  margin: 0 auto;
+`;

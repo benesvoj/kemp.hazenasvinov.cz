@@ -6,6 +6,10 @@ const theme = {
     // primary: "#38a169",
     primary: "#61DBFB",
     secondary: "#fff",
+    tertiary: "#ccc",
+  },
+  borderRadius: {
+    primary: "0.25rem",
   },
 };
 

@@ -3,7 +3,11 @@ import { Text } from "@chakra-ui/react";
 import { getMenuItems } from "../utils/urls";
 import React from "react";
 
-export const Menu = () => {
+interface MenuProps {
+  onClick?: () => void;
+}
+
+export const Menu = (props: MenuProps) => {
   const menuItems = getMenuItems();
 
   return (
@@ -14,6 +18,7 @@ export const Menu = () => {
             key={menuItem.id}
             to={menuItem.url}
             scroll={(el) => el.scrollIntoView({ behavior: "smooth" })}
+            onClick={props.onClick}
           >
             <Text fontSize={"3xl"} as={"b"}>
               {menuItem.title}

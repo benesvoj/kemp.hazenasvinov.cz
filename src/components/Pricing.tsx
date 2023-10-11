@@ -7,17 +7,18 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { PriceSelection } from "./PriceSelection";
+import { PriceBox } from "./PriceBox/PriceBox";
 // import { getCamps } from "../api/camps";
 import { getCamps } from "../utils/campList";
 import { getParticipantsCount } from "../api/participants";
+import { sections } from "../utils/urls";
 
 export const Pricing = () => {
   // const camps = getCamps();
   const camps = getCamps();
 
   return (
-    <Box py={12} id={"pricing"} h={"100vh"}>
+    <Box py={12} id={sections.pricing} h={"100vh"}>
       <Container maxW={"3xl"} h={"100vh"}>
         <Flex
           h={"100%"}
@@ -48,7 +49,7 @@ export const Pricing = () => {
               {camps.length
                 ? camps.map((camp) => {
                     return (
-                      <PriceSelection
+                      <PriceBox
                         key={camp.id}
                         id={camp.id}
                         isPopular={camp.isPopular}
