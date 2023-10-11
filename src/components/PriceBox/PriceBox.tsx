@@ -7,14 +7,16 @@ import {
   Text,
   VStack,
   useColorModeValue,
-  useDisclosure,
 } from "@chakra-ui/react";
-import { BsCalendarDate } from "react-icons/bs";
-import { FaCampground, FaCheckCircle, FaSortAmountDown } from "react-icons/fa";
-import { GiAges } from "react-icons/gi";
-import { ReactNode, useState } from "react";
+import { FaCheckCircle, FaSortAmountDown } from "react-icons/fa";
+import { ReactComponent as IconCalendar } from "../../assets/icons/icon-calendar.svg";
+import { ReactComponent as IconCamp } from "../../assets/icons/icon-camp.svg";
+import { ReactComponent as IconPeople } from "../../assets/icons/icon-people.svg";
+import { PriceBoxItem } from "./components/PriceBoxItem";
+import { ReactNode } from "react";
 import { Button as StyledButton } from "../Button/Button";
 import { isNotNilOrEmpty } from "ramda-adjunct";
+import styled from "styled-components";
 
 export type PriceSelectionProps = {
   id?: number;
@@ -91,18 +93,22 @@ export const PriceBox = (props: PriceSelectionProps) => {
             borderBottomRadius={"xl"}
           >
             <List spacing={3} textAlign="start" px={12}>
-              <ListItem>
-                <ListIcon as={BsCalendarDate} color="green.500" />
-                Termín: {props.dateFrom} - {props.dateTo}
-              </ListItem>
+              <PriceBoxItem
+                title={"Termín"}
+                data={`${props.dateFrom} - ${props.dateTo}`}
+              />
               {isNotNilOrEmpty(props.place) ? (
                 <ListItem>
-                  <ListIcon as={FaCampground} color="green.500" />
+                  <StyledIcon>
+                    <IconCamp />
+                  </StyledIcon>
                   Místo: {props.place}
                 </ListItem>
               ) : null}
               <ListItem>
-                <ListIcon as={GiAges} color="green.500" />
+                <StyledIcon>
+                  <IconPeople />
+                </StyledIcon>
                 Věk: {props.ageFrom} - {props.ageTo} let
               </ListItem>
               {isNotNilOrEmpty(props.theme) ? (
@@ -128,3 +134,12 @@ export const PriceBox = (props: PriceSelectionProps) => {
     </>
   );
 };
+
+const StyledIcon = styled.div`
+  display: inline-block;
+  width: 1.2em;
+  height: auto;
+  color: ${(props) => props.theme.color.primary};
+  filter: invert(84%) sepia(57%) saturate(3604%) hue-rotate(167deg)
+    brightness(100%) contrast(101%);
+`;
