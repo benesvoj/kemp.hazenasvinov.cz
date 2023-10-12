@@ -10,7 +10,7 @@ export const getParticipantsCount = (id: number) => {
       `${process.env.REACT_APP_API_URL}/api/participants`,
       {
         params: { selectedCamp: id },
-      }
+      },
     );
     setCount(data);
   };

@@ -1,9 +1,7 @@
-import { Box, Flex, HStack, IconButton, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, IconButton, Stack } from "@chakra-ui/react";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
-import { HashLink as Link } from "react-router-hash-link";
 import { Logo } from "./Logo";
 import { Menu } from "./Menu";
-import { getMenuItems } from "../utils/urls";
 import React, { useState } from "react";
 
 export const Header = () => {

@@ -1,22 +1,27 @@
-import { ReactComponent as IconCalendar } from "../../../assets/icons/icon-calendar.svg";
-import { ReactComponent as IconCamp } from "../../assets/icons/icon-camp.svg";
-import { ReactComponent as IconPeople } from "../../assets/icons/icon-people.svg";
+import React from 'react';
 import { ListItem } from "@chakra-ui/react";
-import styled from "styled-components";
+import { isNotNil, isNotNilOrEmpty } from "ramda-adjunct";
+import styled, { useTheme } from "styled-components";
 
 interface PriceBoxItemProps {
   title: string;
-  data: string;
+  data?: string;
   icon?: string;
 }
 
 export const PriceBoxItem = (props: PriceBoxItemProps) => {
+  const theme = useTheme();
+
+  if (!props.icon) return null;
+
+  const IconComponent = theme.icons?.[props.icon];
+
   return (
     <ListItem display={"flex"} gap={2} alignItems={"center"}>
       <StyledIcon>
-        <IconCalendar />
+        {isNotNil(IconComponent) && <IconComponent data-iconkey={props.icon} />}
       </StyledIcon>
-      {props.title}: {props.data}
+      {props.title}: {isNotNilOrEmpty(props.data) ? props.data : "N/A"}
     </ListItem>
   );
 };

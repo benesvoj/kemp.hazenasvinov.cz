@@ -6,16 +6,13 @@ import {
   Stack,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import { PriceBox } from "./PriceBox/PriceBox";
-// import { getCamps } from "../api/camps";
-import { getCamps } from "../utils/campList";
-import { getParticipantsCount } from "../api/participants";
-import { sections } from "../utils/urls";
+} from "@chakra-ui/react"
+import { PriceBox } from "./PriceBox/PriceBox"
+import { getCamps } from "../utils/campList"
+import { sections } from "../utils/urls"
 
 export const Pricing = () => {
-  // const camps = getCamps();
-  const camps = getCamps();
+  const camps = getCamps()
 
   return (
     <Box py={12} id={sections.pricing} h={"100vh"}>
@@ -27,11 +24,11 @@ export const Pricing = () => {
           justifyContent={"center"}
         >
           <Stack>
-            <VStack spacing={2} textAlign="center">
-              <Heading as="h1" fontSize="4xl">
+            <VStack spacing={2} textAlign='center'>
+              <Heading as='h1' fontSize='4xl'>
                 Kempy a soustředění
               </Heading>
-              <Text fontSize="lg" color={"gray.500"}>
+              <Text fontSize='lg' color={"gray.500"}>
                 Svinovský kemp je pořádán pod hlavičkou oddílu TJ Sokol Svinov,
                 celostátní soustředění pod komisi mládeže Svazu národní házené.{" "}
                 <br />
@@ -41,8 +38,8 @@ export const Pricing = () => {
             </VStack>
             <Stack
               direction={{ base: "column", md: "row" }}
-              textAlign="center"
-              justify="center"
+              textAlign='center'
+              justify='center'
               spacing={{ base: 4, lg: 10 }}
               py={10}
             >
@@ -63,7 +60,7 @@ export const Pricing = () => {
                         ageTo={camp.ageTo}
                         // limitFrom={getParticipantsCount(camp.id)}
                       />
-                    );
+                    )
                   })
                 : null}
             </Stack>
@@ -71,5 +68,5 @@ export const Pricing = () => {
         </Flex>
       </Container>
     </Box>
-  );
-};
+  )
+}

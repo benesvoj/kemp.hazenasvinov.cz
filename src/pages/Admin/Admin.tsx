@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 export const Admin = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { login } = useAuth();
 

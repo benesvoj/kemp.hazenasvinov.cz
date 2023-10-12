@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Container,
@@ -6,11 +7,10 @@ import {
   VisuallyHidden,
   chakra,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
-import { Logo } from "./Logo";
-import { MdOutlineAdminPanelSettings } from "react-icons/md";
-import { ReactNode } from "react";
+} from '@chakra-ui/react';
+import {Logo} from './Logo';
+import {ReactNode} from 'react';
+import {useTheme} from 'styled-components';
 
 const SocialButton = ({
   children,
@@ -23,19 +23,19 @@ const SocialButton = ({
 }) => {
   return (
     <chakra.button
-      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
-      rounded={"full"}
+      bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+      rounded={'full'}
       w={8}
       h={8}
-      cursor={"pointer"}
-      as={"a"}
+      cursor={'pointer'}
+      as={'a'}
       href={href}
-      display={"inline-flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      transition={"background 0.3s ease"}
+      display={'inline-flex'}
+      alignItems={'center'}
+      justifyContent={'center'}
+      transition={'background 0.3s ease'}
       _hover={{
-        bg: useColorModeValue("blackAlpha.200", "whiteAlpha.200"),
+        bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
       }}
     >
       <VisuallyHidden>{label}</VisuallyHidden>
@@ -44,38 +44,42 @@ const SocialButton = ({
   );
 };
 
+const SocialIcon = ({icon}: {icon: string}) => {
+  const theme = useTheme();
+
+  if (!icon) return null;
+
+  const IconComponent = theme.icons?.[icon];
+
+  return <IconComponent data-iconkey={icon} />;
+};
+
 export const Footer = () => {
   return (
-    <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
-      color={useColorModeValue("gray.700", "gray.200")}
-    >
+    <Box bg={'gray.900'} color={'gray.200'}>
       <Container
         as={Stack}
-        maxW={"6xl"}
+        maxW={'6xl'}
         py={4}
-        direction={{ base: "column", md: "row" }}
+        direction={{base: 'column', md: 'row'}}
         spacing={4}
-        justify={{ base: "center", md: "space-between" }}
-        align={{ base: "center", md: "center" }}
+        justify={{base: 'center', md: 'space-between'}}
+        align={{base: 'center', md: 'center'}}
       >
         <Logo />
-        <Text>© 2023 TJ Sokol Svinov. Všechna práva vyhrazena.</Text>
-        <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Twitter"} href={"#"}>
-            <FaTwitter />
+        <Text>&copy; 2023 TJ Sokol Svinov. Všechna práva vyhrazena.</Text>
+        <Stack direction={'row'} spacing={6}>
+          <SocialButton label={'Facebook'} href={'#'}>
+            <SocialIcon icon={'facebook'} />
           </SocialButton>
-          <SocialButton label={"YouTube"} href={"#"}>
-            <FaYoutube />
-          </SocialButton>
-          <SocialButton label={"Instagram"} href={"#"}>
-            <FaInstagram />
+          <SocialButton label={'Instagram'} href={'#'}>
+            <SocialIcon icon={'instagram'} />
           </SocialButton>
         </Stack>
         |
-        <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Administrace"} href={"/admin"}>
-            <MdOutlineAdminPanelSettings />
+        <Stack direction={'row'} spacing={6}>
+          <SocialButton label={'Administrace'} href={'/admin'}>
+            <SocialIcon icon={'admin'} />
           </SocialButton>
         </Stack>
       </Container>
