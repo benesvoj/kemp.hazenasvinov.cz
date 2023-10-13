@@ -1,36 +1,12 @@
-import { Box, Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
-import { sections } from "../utils/urls";
+import {sections} from '../utils/urls';
+import {ZoneHeading} from './Zone/components/ZoneHeading';
+import {textData} from '../api/data';
+import {Zone} from './Zone/Zone';
 
 export const Information = () => {
   return (
-    <Box id={sections.information} h={"100vh"} display={"flex"}>
-      <Container maxW={"3xl"}>
-        <Flex
-          h={"100%"}
-          w={"100%"}
-          alignItems={"center"}
-          justifyContent={"center"}
-        >
-          <Stack
-            as={Box}
-            textAlign={"center"}
-            spacing={{ base: 8, md: 14 }}
-            py={{ base: 20, md: 36 }}
-          >
-            <Heading
-              fontWeight={600}
-              fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-              lineHeight={"110%"}
-            >
-              O kempu
-            </Heading>
-            <Text color={"gray.500"}>
-              Týdenní kemp plný zážitků, nových přátel, sportovních aktivit a
-              výletů! Poznej něco nového s naší partou.
-            </Text>
-          </Stack>
-        </Flex>
-      </Container>
-    </Box>
+    <Zone url={sections.information}>
+      <ZoneHeading heading={textData.information.heading} text={textData.information.text} />
+    </Zone>
   );
 };

@@ -1,57 +1,20 @@
 import React from 'react';
-import {
-  Box,
-  Container,
-  Stack,
-  Text,
-  VisuallyHidden,
-  chakra,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import {Box, Container, Stack, Text} from '@chakra-ui/react';
 import {Logo} from './Logo';
-import {ReactNode} from 'react';
-import {useTheme} from 'styled-components';
+import styled, {useTheme} from 'styled-components';
 
-const SocialButton = ({
-  children,
-  label,
-  href,
-}: {
-  children: ReactNode;
-  label: string;
-  href: string;
-}) => {
-  return (
-    <chakra.button
-      bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-      rounded={'full'}
-      w={8}
-      h={8}
-      cursor={'pointer'}
-      as={'a'}
-      href={href}
-      display={'inline-flex'}
-      alignItems={'center'}
-      justifyContent={'center'}
-      transition={'background 0.3s ease'}
-      _hover={{
-        bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
-      }}
-    >
-      <VisuallyHidden>{label}</VisuallyHidden>
-      {children}
-    </chakra.button>
-  );
-};
-
-const SocialIcon = ({icon}: {icon: string}) => {
+const ButtonIcon = ({icon}: {icon: string}) => {
   const theme = useTheme();
 
   if (!icon) return null;
 
   const IconComponent = theme.icons?.[icon];
 
-  return <IconComponent data-iconkey={icon} />;
+  return (
+    <StyledIcon>
+      <IconComponent data-iconkey={icon} />
+    </StyledIcon>
+  );
 };
 
 export const Footer = () => {
@@ -69,20 +32,22 @@ export const Footer = () => {
         <Logo />
         <Text>&copy; 2023 TJ Sokol Svinov. Všechna práva vyhrazena.</Text>
         <Stack direction={'row'} spacing={6}>
-          <SocialButton label={'Facebook'} href={'#'}>
-            <SocialIcon icon={'facebook'} />
-          </SocialButton>
-          <SocialButton label={'Instagram'} href={'#'}>
-            <SocialIcon icon={'instagram'} />
-          </SocialButton>
+          <ButtonIcon icon={'facebook'} />
+          <ButtonIcon icon={'instagram'} />
         </Stack>
-        |
         <Stack direction={'row'} spacing={6}>
-          <SocialButton label={'Administrace'} href={'/admin'}>
-            <SocialIcon icon={'admin'} />
-          </SocialButton>
+          <ButtonIcon icon={'admin'} />
         </Stack>
       </Container>
     </Box>
   );
 };
+
+const StyledIcon = styled.div`
+  display: inline-block;
+  cursor: pointer;
+  width: 1.2em;
+  height: auto;
+  color: ${(props) => props.theme.color.primary};
+  filter: invert(84%) sepia(57%) saturate(3604%) hue-rotate(167deg) brightness(100%) contrast(101%);
+`;

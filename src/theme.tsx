@@ -9,9 +9,14 @@ const color = {
 const borderRadius = {
   primary: '0.25rem',
 };
+const background = {
+  primary: 'gray.700',
+  secondary: 'gray.700',
+};
 
 export const theme = {
   color,
   borderRadius,
   icons: themeIcons,
+  background,
 } as const;

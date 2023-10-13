@@ -1,45 +1,29 @@
-import {
-  Box,
-  Container,
-  HStack,
-  Heading,
-  Stack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { Button as StyledButton } from "./Button/Button";
-import { sections } from "../utils/urls";
-import styled from "styled-components";
+import {HStack} from '@chakra-ui/react';
+import {Button as StyledButton} from './Button/Button';
+import {sections} from '../utils/urls';
+import styled, {useTheme} from 'styled-components';
+import {ZoneHeading} from './Zone/components/ZoneHeading';
+import {textData} from '../api/data';
+import {Zone} from './Zone/Zone';
 
 export const Contact = () => {
+  const theme = useTheme();
+
   return (
-    <Box id={sections.contact} bg={"gray.700"} h={"100vh"} display={"flex"}>
-      <Container maxW={"7xl"} as={Stack} justifyContent={"center"}>
-        <VStack>
-          <Heading as={"h1"}>Kontaktujte nás</Heading>
-          <Text>
-            V pripade nejanostni nas nevahejte kontaktovat pro vice informaci
-          </Text>
-          <HStack w={350} justifyContent={"center"}>
-            <StyledForm>
-              <label>Email</label>
-              <StyledInput
-                id={"email"}
-                type={"email"}
-                placeholder={"email@email.cz"}
-              />
-              <label htmlFor={"email"}>Text zprávy</label>
-              <StyledTextarea
-                placeholder={"Zde nam muzete zanechat zpravu."}
-              ></StyledTextarea>
-              <StyledButtonWrapper>
-                <StyledButton>Odeslat</StyledButton>
-              </StyledButtonWrapper>
-            </StyledForm>
-          </HStack>
-        </VStack>
-      </Container>
-    </Box>
+    <Zone url={sections.contact} bg={theme.background.secondary}>
+      <ZoneHeading heading={textData.contact.heading} text={textData.contact.text} />
+      <HStack w={350} justifyContent={'center'}>
+        <StyledForm>
+          <label>Email</label>
+          <StyledInput id={'email'} type={'email'} placeholder={'email@email.cz'} />
+          <label htmlFor={'email'}>Text zprávy</label>
+          <StyledTextarea placeholder={'Zde nam muzete zanechat zpravu.'}></StyledTextarea>
+          <StyledButtonWrapper>
+            <StyledButton>Odeslat</StyledButton>
+          </StyledButtonWrapper>
+        </StyledForm>
+      </HStack>
+    </Zone>
   );
 };
 

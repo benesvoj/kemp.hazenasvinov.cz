@@ -1,36 +1,35 @@
-import {Box, Container, Flex, Heading, Stack, useColorModeValue} from '@chakra-ui/react';
+import {Stack} from '@chakra-ui/react';
 import {TestimonialBox} from './components/TestimonialBox';
 import {getTestimonialList} from '../../utils/testimonialList';
+import {ZoneHeading} from '../Zone/components/ZoneHeading';
+import {textData} from '../../api/data';
+import {Zone} from '../Zone/Zone';
+import {useTheme} from 'styled-components';
 
 export const Testimonials = () => {
   const testimonials = getTestimonialList();
+  const theme = useTheme();
 
   return (
-    <Box bg={useColorModeValue('gray.100', 'gray.700')}>
-      <Container maxW={'7xl'} py={16} as={Stack} spacing={12} h={'100vh'}>
-        <Flex h={'100%'} w={'100%'} alignItems={'center'} justifyContent={'center'}>
-          <Stack>
-            <Stack spacing={0} align={'center'}>
-              <Heading>Co o kempu říkájí Ti, kteří se zúčastnili?</Heading>
-            </Stack>
-            <Stack direction={{base: 'column', md: 'row'}} spacing={{base: 10, md: 4, lg: 10}}>
-              {testimonials.map((testimonial) => {
-                return (
-                  <TestimonialBox
-                    key={testimonial.id}
-                    id={testimonial.id}
-                    title={testimonial.title}
-                    description={testimonial.description}
-                    imageUrl={testimonial.imageUrl}
-                    name={testimonial.name}
-                    ageAndCamp={testimonial.ageAndCamp}
-                  />
-                );
-              })}
-            </Stack>
-          </Stack>
-        </Flex>
-      </Container>
-    </Box>
+    <Zone bg={theme.background.secondary}>
+      <Stack spacing={0} align={'center'}>
+        <ZoneHeading heading={textData.testimonials.heading} />
+      </Stack>
+      <Stack direction={{base: 'column', md: 'row'}} gap={{base: 4, md: 4, lg: 10}}>
+        {testimonials.map((testimonial) => {
+          return (
+            <TestimonialBox
+              key={testimonial.id}
+              id={testimonial.id}
+              title={testimonial.title}
+              description={testimonial.description}
+              imageUrl={testimonial.imageUrl}
+              name={testimonial.name}
+              ageAndCamp={testimonial.ageAndCamp}
+            />
+          );
+        })}
+      </Stack>
+    </Zone>
   );
 };
